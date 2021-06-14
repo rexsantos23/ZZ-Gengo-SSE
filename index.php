@@ -74,6 +74,55 @@ class Palindrome
         
         return $right-$left-1;
     }
+
+    /**
+     * [minPalPartion description]
+     * @param  [type] &$str [description]
+     * @return [type]       [description]
+     */
+    function minPalPartion(&$str)
+    {
+     
+        //Get the length of the string
+        $n = strlen($str);
+        $C = array_fill(0, $n, 0);
+        $p = array_fill(0, 10, array_fill(0, 10, 0));
+ 
+        for ($i = 0; $i < $n; $i++) {
+            $P[$i][$i] = true;
+        }
+
+        for ($L = 2; $L <= $n; $L++) {
+            // For substring of length L, set
+            // different possible starting indexes
+            for ($i = 0; $i < $n - $L + 1; $i++) {
+                $j = $i + $L - 1; // Set ending inde
+          
+                if ($L == 2) {
+                    $P[$i][$j] = ($str[$i] == $str[$j]);
+                } else {
+                    $P[$i][$j] = ($str[$i] == $str[$j]) &&
+                              $P[$i + 1][$j - 1];
+                }
+            }
+        }
+ 
+        for ($i = 0; $i < $n; $i++) {
+            if ($P[0][$i] == true) {
+                $C[$i] = 0;
+            } else {
+                $C[$i] = PHP_INT_MAX;
+                for ($j = 0; $j < $i; $j++) {
+                    if ($P[$j + 1][$i] == true &&
+                       1 + $C[$j] < $C[$i]) {
+                        $C[$i] = 1 + $C[$j];
+                    }
+                }
+            }
+        }
+       
+        return $C[$n - 1];
+    }
 }
 
 $value = 'abcdcba';
@@ -89,4 +138,4 @@ $longest = 'abaxyzzyxf';
 echo $palindrome->getLongestPalindrome($longest);
 
 echo ' <br /> ------- Min Partion Palindrome ------- <br />' ;
-$palindrome->minPalPartion($longest);
+echo $palindrome->minPalPartion($longest);
