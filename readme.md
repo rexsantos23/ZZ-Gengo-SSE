@@ -2,7 +2,7 @@
 
 Palindrome is a word, phrase, or sequence that reads the same backward as forward, e.g., madam or nurses run.
 
-##How to run
+## How to run
 
 Clone this repo to your localhost, and on your address bar go to
 [ZZ-Gengo-SSE](localhost/ZZ-Gengo-SSE) or localhost/ZZ-Gengo-SSE
